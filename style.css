@@ -1,8 +1,13 @@
-<<<<<<< HEAD
+
 table th td {
     border: solid black 1px; 
 }
-=======
+
+table th td {
+    border: solid black 1px; 
+}
+
+
 *{
     box-sizing: border-box;
 }
@@ -75,4 +80,3 @@ footer{
     margin-top: 20px;
 }
 
->>>>>>> main
