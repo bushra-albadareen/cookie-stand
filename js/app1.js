@@ -21,11 +21,7 @@ function Location(name, minCustomer, maxCustomer, aveCookies) {
 
 }
 
-let seattle = new Location('seattle', 23, 65, 6.3);
-let tokyo = new Location('tokyo', 3, 24, 1.2);
-let dubai = new Location('dubai', 11, 38, 3.7);
-let paris = new Location('paris', 20, 38, 2.3);
-let lima = new Location('lima', 2, 16, 4.6);
+
 
 Location.prototype.calcCookiesPerHour = function () {
     for (let i = 0; i < hours.length; i++) {
@@ -34,46 +30,52 @@ Location.prototype.calcCookiesPerHour = function () {
     }
 }
 
-
+let seattle = new Location('seattle', 23, 65, 6.3);
+let tokyo = new Location('tokyo', 3, 24, 1.2);
+let dubai = new Location('dubai', 11, 38, 3.7);
+let paris = new Location('paris', 20, 38, 2.3);
+let lima = new Location('lima', 2, 16, 4.6);
 
 Location.prototype.render = function () {
-    let parent = document.getElementById('parent');
-    let table = document.createElement('table');
+
+    let parent=document.getElementById('parent');
+    let table=document.createElement('table');
     parent.appendChild(table);
 
-    let headingRow = document.createElement('tr');
-    table.appendChild(headingRow);
+    let headerRaw=document.createElement('tr');
+    table.appendChild(headerRaw);
 
-    let nameElement = document.createElement('th');
-    headingRow.appendChild(nameElement);
-    nameElement.textContent = 'name'
+    let headerName=document.createElement('th');
+    headerRaw.appendChild(headerName);
+    headerName.textContent='name'
 
     for (let i = 0; i < hours.length; i++) {
-        let hourElement = document.createElement('th');
-        headingRow.appendChild(hourElement);
-        hourElement.textContent = hours[i]
+        let headerHours = document.createElement('th');
+        headerRaw.appendChild(headerHours);
+        headerHours.textContent = hours[i];
     }
 
-    let totalElement = document.createElement('th');
-    headingRow.appendChild(totalElement);
-    totalElement.textContent = 'total'
 
-    let locationRaw = document.createElement('tr');
-    table.appendChild(locationRaw);
+    let headerTotal = document.createElement('th');
+    headerRow.appendChild(headerTotal);
+    headerTotal.textContent = 'total'
+
+    let dataRaw = document.createElement('tr');
+    table.appendChild(dataRaw);
 
     let dataName = document.createElement('td');
-    locationRaw.appendChild(dataName);
-    dataName.textContent = this.locationName;
+    dataRaw.appendChild(dataName);
+    dataName.textContent = this.name;
 
     for (let i = 0; i < hours.length; i++) {
         let dataEntry = document.createElement('td');
-        locationRaw.appendChild(dataEntry);
-        dataEntry.textContent = this.cookiesPerHour;
+        dataRaw.appendChild(dataEntry);
+        dataEntry.textContent = this.cookiesPerHour[i];
     }
 
     let dataTotal = document.createElement('td');
-    locationRaw.appendChild(dataTotal);
-    total.textContent = this.total;
+    dataRaw.appendChild(dataTotal);
+    dataTotal.textContent = this.total;
 
     let footerRaw = document.createElement('tr');
     table.appendChild(footerRaw);
@@ -100,9 +102,9 @@ Location.prototype.render = function () {
     footerLast.textContent = megaTotal;
 }
 
-for (let i = 0; i < locations; i++) {
-    locations[i].calcCookiesPerHour();
-    locations[i].render();
+for (let j = 0; j < locations; j++) {
+    locations[j].calcCookiesPerHour();
+    locations[j].render();
 }
 
 
