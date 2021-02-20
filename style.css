@@ -1,3 +1,77 @@
+
 table th td {
     border: solid black 1px; 
 }
+
+*{
+    box-sizing: border-box;
+}
+header h1{
+    color: black;
+}
+
+body{
+    font-family: Arial;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+
+header{
+    padding: 30px;
+    text-align: center;
+    color:white;
+    
+}
+
+nav{
+    background-color: #333;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 20px;
+    
+}
+
+ul .placeholder{
+    width: 100px;
+    float: left; 
+}
+
+#upper-raw{
+    float: none;
+    width: 100%;
+}
+
+#midle-raw{
+    float: none;
+    width: 100%;
+}
+
+#lower-raw{
+    float: none;
+    width: 100%;
+
+}
+
+.card{
+    background-color: white;
+    padding: 100px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+
+.placeholder{
+    width: 100px;
+    float: left;
+}
+
+footer{
+    clear: both;
+    padding: 20px;
+    background-color: gray;
+    margin-top: 20px;
+}
+
