@@ -120,11 +120,23 @@ function makeFooter() {
     footerLast.textContent = megaTotal;
 }
 
+let locationForm = document.getElementById('locationForm');
+locationForm.addEventListener('submit',submitter);
 
+function submitter (event){
+    event.preventDefault();
+
+    let name = event.target.nameField.value;
+    let minCustomer = event.target.minCustomerField.value;
+    let maxCustomer = event.target.maxCustomerField.value;
+    let aveCookies = event.target.aveCookiesField.value;
+    
+    let addedLocation = new location(name, minCustomer, maxCustomer, aveCookies)
+}
 
 makeHeader();
 
-for (let i = 0; i < locations; i++) {
+for (let i = 0; i < locations.length; i++) {
     locations[i].calcCustomerPerHour();
     locations[i].calcCookiesPerHour();
     locations[i].render();
