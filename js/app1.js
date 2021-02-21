@@ -15,6 +15,7 @@ function Location(name, minCustomer, maxCustomer, aveCookies) {
     this.minCustomer = minCustomer;
     this.maxCustomer = maxCustomer;
     this.aveCookies = aveCookies;
+    this.customerPerHour = [];
     this.cookiesPerHour = [];
     this.total = 0;
     locations.push(this);
@@ -22,13 +23,20 @@ function Location(name, minCustomer, maxCustomer, aveCookies) {
 }
 
 
+Location.prototype.calcCustomerPerHour = function () {
+    for (let i = 0; i < hourList.length; i++) {
+        this.customerPerHour.push(random(this.minCustomer, this.maxCustomer));
+    }
+},
+
 
 Location.prototype.calcCookiesPerHour = function () {
-    for (let i = 0; i < hours.length; i++) {
-        this.cookiesPerHour = (Math.floor(random(this.minCustomer, this.maxCustomer) * this.aveCookies));
-        this.total += this.cookiesPerHour[i];
-    }
+        for (let i = 0; i < hours.length; i++) {
+            this.cookiesPerHour.push(Math.floor(this.customerPerHour[i] * this.aveCookies));
+            this.total += this.cookiesPerHour[i];
+        }
 }
+
 
 let seattle = new Location('seattle', 23, 65, 6.3);
 let tokyo = new Location('tokyo', 3, 24, 1.2);
@@ -36,70 +44,64 @@ let dubai = new Location('dubai', 11, 38, 3.7);
 let paris = new Location('paris', 20, 38, 2.3);
 let lima = new Location('lima', 2, 16, 4.6);
 
+
+
 let parent = document.getElementById('parent');
 let table = document.createElement('table');
 parent.appendChild(table);
 
 
-let makeHeader = function () {
+
+function makeHeader() {
     let headerRaw = document.createElement('tr');
     table.appendChild(headerRaw);
 
-
-
-    let firstTh = document.createElement('th');
-    headerRaw.appendChild(firstTh);
-    firstTh.textContent = 'name'
-
+    let nameTh = document.createElement('th');
+    headerRaw.appendChild(nameTh);
+    nameTh.textContent = 'location name'
 
     for (let i = 0; i < hours.length; i++) {
-        let thElement = document.createElement('th');
-        headerRaw.appendChild(thElement);
-        thElement.textContent = hours[i];
+        let dataTh = document.createElement('th');
+        headerRaw.appendChild(dataTh);
+        dataTh.textContent = hours[i];
 
     }
 
-
     let lastTh = document.createElement('th');
     headerRaw.appendChild(lastTh);
-    lastTh.textContent = 'total'
-
-
+    lastTh.textContent = 'daily location total'
 }
 
 
 Location.prototype.render = function () {
-
     let dataRaw = document.createElement('tr');
     table.appendChild(dataRaw);
 
-    let dataName = document.createElement('td');
-    dataRaw.appendChild(dataName);
-    dataName.textContent = this.name;
+    let nameTd = document.createElement('td');
+    dataRaw.appendChild(nameTd);
+    nameTd.textContent = this.name;
 
    
 
     for (let i = 0; i < hours.length; i++) {
-        let tdElement = document.createElement('td');
-        dataRaw.appendChild(tdElement);
-        tdElement.textContent = this.cookiesPerHour[i];
+        let dataTd = document.createElement('td');
+        dataRaw.appendChild(dataTd);
+        dataTd.textContent = this.cookiesPerHour[i];
+
     }
     
-    let totalTd = document.createElement('td');
-    dataRaw.appendChild(totalTd);
-     totalTd.textContent = this.total;
+    let lastTd = document.createElement('td');
+    dataRaw.appendChild(lastTd);
+    lastTd.textContent = this.total;
+
 }
-
-     
-
-let makeFooter = function () {
+function makeFooter() {
     let footerRaw = document.createElement('tr');
     table.appendChild(footerRaw);
 
-    let footerTh = document.createElement('th');
-    footerRaw.appendChild(footerTh);
-    footerTh.textContent = 'total'
-
+    let nameTf = document.createElement('th');
+    footerRaw.appendChild(nameTf);
+    nameTf.textContent = 'total hours'
 
     let megaTotal = 0;
 
@@ -110,11 +112,6 @@ let makeFooter = function () {
             totalPerHour += locations[j].cookiesPerHour[i];
             megaTotal += locations[j].cookiesPerHour[i];
         }
-        let footerData = document.createElement('th');
-        footerRaw.appendChild(footerData);
-        footerData.textContent = totalPerHour;
-    }
-
 
 
     let footerLast = document.createElement('th');
@@ -122,18 +119,31 @@ let makeFooter = function () {
     footerLast.textContent = megaTotal;
 }
 
+let locationForm = document.getElementById('locationForm');
+locationForm.addEventListener('submit',submitter);
 
+function submitter (event){
+    event.preventDefault();
 
-
+    let name = event.target.nameField.value;
+    let minCustomer = event.target.minCustomerField.value;
+    let maxCustomer = event.target.maxCustomerField.value;
+    let aveCookies = event.target.aveCookiesField.value;
+    
+    let addedLocation = new location(name, minCustomer, maxCustomer, aveCookies)
+}
 
 makeHeader();
 
-for (let j = 0; j < locations.length; j++) {
-    locations[j].calcCookiesPerHour();
-    locations[j].render();
+for (let i = 0; i < locations.length; i++) {
+    locations[i].calcCustomerPerHour();
+    locations[i].calcCookiesPerHour();
+    locations[i].render();
 }
 
 makeFooter();
+
+
 
 
 
