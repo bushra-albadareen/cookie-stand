@@ -422,5 +422,3 @@ makeFooter();
 // // lima.calcCustomerPerHour();   
 // lima.calcCookiesPerHour();    
 // lima.render(); 
-
-
