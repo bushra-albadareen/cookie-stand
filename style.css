@@ -1,10 +1,10 @@
 
-table th td {
+* {
     border: solid black 1px; 
 }
 
 
-*{
+/* *{
     box-sizing: border-box;
 }
 header h1{
@@ -75,4 +75,4 @@ footer{
     background-color: gray;
     margin-top: 20px;
 }
-
+ */

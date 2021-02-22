@@ -24,7 +24,7 @@ function Location(name, minCustomer, maxCustomer, aveCookies) {
 
 
 Location.prototype.calcCustomerPerHour = function () {
-    for (let i = 0; i < hourList.length; i++) {
+    for (let i = 0; i < hours.length; i++) {
         this.customerPerHour.push(random(this.minCustomer, this.maxCustomer));
     }
 },
@@ -120,19 +120,24 @@ function makeFooter() {
     footerLast.textContent = megaTotal;
 }
 
-let locationForm = document.getElementById('locationForm');
-locationForm.addEventListener('submit',submitter);
+// let locationForm = document.getElementById('locationForm');
+// locationForm.addEventListener('submit',submitter);
 
-function submitter (event){
-    event.preventDefault();
+// function submitter (event){
+//     event.preventDefault();
 
-    let name = event.target.nameField.value;
-    let minCustomer = event.target.minCustomerField.value;
-    let maxCustomer = event.target.maxCustomerField.value;
-    let aveCookies = event.target.aveCookiesField.value;
+//     let name = event.target.nameField.value;
+//     let minCustomer = event.target.minCustomerField.value;
+//     let maxCustomer = event.target.maxCustomerField.value;
+//     let aveCookies = event.target.aveCookiesField.value;
     
-    let addedLocation = new location(name, minCustomer, maxCustomer, aveCookies)
-}
+//     let addedLocation = new location(name, minCustomer, maxCustomer, aveCookies)
+
+//     addedLocation.calcCustomerPerHour();
+//     addedLocation.calcCookiesPerHour();
+//     addedLocation.render();
+    
+// }
 
 makeHeader();
 
