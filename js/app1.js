@@ -64,6 +64,7 @@ function makeHeader() {
         let dataTh = document.createElement('th');
         headerRaw.appendChild(dataTh);
         dataTh.textContent = hours[i];
+
     }
 
     let lastTh = document.createElement('th');
@@ -80,12 +81,15 @@ Location.prototype.render = function () {
     dataRaw.appendChild(nameTd);
     nameTd.textContent = this.name;
 
+   
+
     for (let i = 0; i < hours.length; i++) {
         let dataTd = document.createElement('td');
         dataRaw.appendChild(dataTd);
         dataTd.textContent = this.cookiesPerHour[i];
-    }
 
+    }
+    
     let lastTd = document.createElement('td');
     dataRaw.appendChild(lastTd);
     lastTd.textContent = this.total;
@@ -108,11 +112,6 @@ function makeFooter() {
             totalPerHour += locations[j].cookiesPerHour[i];
             megaTotal += locations[j].cookiesPerHour[i];
         }
-        let footerData = document.createElement('th');
-        footerRaw.appendChild(footerData);
-        footerData.textContent = totalPerHour;
-
-    }
 
 
     let footerLast = document.createElement('th');
